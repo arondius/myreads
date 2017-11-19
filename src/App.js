@@ -22,7 +22,6 @@ class BooksApp extends React.Component {
       const bookShelves = [];
       this.state.bookList.map((book, index) => {
         if(!bookShelves.includes(book.shelf)) {
-          console.log('book.shelf', book.shelf);
           bookShelves.push(book.shelf)
         }
         return bookShelves;
