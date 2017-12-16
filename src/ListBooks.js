@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
+import Book from './Book'
 class ListBooks extends Component {
 
+  onBookShelfChanged(book, shelf) {
+    this.props.onChangeBookShelf(book, shelf);
+  }
+
   renderBookshelves() {
-    if(this.props.bookShelves.length > 0) {
+    // console.log('ListBooks.js this.props in renderBookshelves ', this.props);
+    if(this.props.bookShelves && this.props.bookShelves.length > 0) {
       return (
         this.props.bookShelves.map((bookShelf) => 
           <div className="bookshelf" key={bookShelf}>
@@ -23,24 +28,7 @@ class ListBooks extends Component {
       return (
         <ol className="books-grid">
           {books.map((book) =>
-            <li key={book.title}>
-              <div className="book">
-                <div className="book-top">
-                  <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url(' + book.imageLinks.thumbnail + ')' }}></div>
-                  <div className="book-shelf-changer">
-                    <select>
-                      <option value="none" disabled>Move to...</option>
-                      <option value="currentlyReading">Currently Reading</option>
-                      <option value="wantToRead">Want to Read</option>
-                      <option value="read">Read</option>
-                      <option value="none">None</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="book-title">{book.title}</div>
-                <ul className="book-authors">{book.authors.map(author => <li className="book-authors__author" key={author}>{author}<br/></li>)}</ul>
-              </div>
-            </li>
+            <Book book={book} onChangeBookShelf={this.onBookShelfChanged.bind(this)} key={book.title}/>
           )}
         </ol>
       )
