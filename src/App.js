@@ -21,26 +21,31 @@ class BooksApp extends React.Component {
     })
   }
   
-  changeBookShelf = (book, shelf) => {
-    BooksAPI.update(book, shelf).then((newBookList) => {
+  changeBookShelf = (bookToUpdate, shelf) => {
+    BooksAPI.update(bookToUpdate, shelf).then((newBookList) => {
       //console.log('App.js newBookList', newBookList);
 
       // So here we need to use the return value from the API result (newBookList), 
-      // instead of using book.shelf = shelf, as the API result is the source of thruth here
-      // Merely setting the shelf of the book to the
+      // instead of using book.shelf = shelf.
+      // Only setting the shelf of the book in state.booklist will cause a problem when
+      // setting the shelf to 'none' as this will not remove the books from state
+      // The API promise result is the source of thruth that should be used to update 
+      // state.
       
-      let books = [];
+      
       const bookList = this.state.bookList;
-      
+      let books = [];
       for(const newShelf in newBookList) {
         if(newBookList.hasOwnProperty(newShelf)) {
-          newBookList[newShelf].map( (id) => (
-            books.push(...bookList.filter(b => b.id === id))
-          ))
+          newBookList[newShelf].map( (id, key) => {
+             const book = ( bookList.filter((b) => b.id === id)[0] ) ? (bookList.filter((b) => b.id === id)[0]) : bookToUpdate;
+             //console.log('book ', book);
+             book.shelf = newShelf;
+            return books.push(book);
+          })
         }
       }
       this.setState({bookList: books});
-      console.log('App.js state booklist after changeBookShelf ',this.state.bookList);
     });
   }
 
@@ -53,7 +58,7 @@ class BooksApp extends React.Component {
         )}
         />
         <Route path="/search" render={() => (
-          <SearchBooks onChangeBookShelf={this.changeBookShelf.bind(this)}/>
+          <SearchBooks onChangeBookShelf={this.changeBookShelf.bind(this)} bookList={this.state.bookList}/>
         )}
         />
       </div>

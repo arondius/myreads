@@ -4,10 +4,16 @@ import { search } from './BooksAPI'
 import Book from './Book'
 
 class Search extends Component {
-  state = {
-    query: '',
-    results: []
+
+  constructor(props) {
+    super(props);
+    this.state = {
+        bookList: this.props.bookList,
+        query: '',
+        results: []
+    }
   }
+
   
   onBookShelfChanged(book, shelf) {
     this.props.onChangeBookShelf(book, shelf);
