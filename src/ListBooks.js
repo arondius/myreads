@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Book from './Book'
+
 class ListBooks extends Component {
 
   onBookShelfChanged(book, shelf) {
@@ -53,6 +55,12 @@ class ListBooks extends Component {
       </div>
     )
   }
+}
+
+ListBooks.propTypes = {
+  onChangeBookShelf: PropTypes.func.isRequired,
+  bookShelves: PropTypes.array.isRequired,
+  bookList: PropTypes.array.isRequired
 }
 
 export default ListBooks;
