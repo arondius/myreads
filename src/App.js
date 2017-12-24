@@ -25,13 +25,12 @@ class BooksApp extends React.Component {
     BooksAPI.update(bookToUpdate, shelf).then((newBookList) => {
 
       // So here we need to use the return value from the API result (newBookList), 
-      // instead of using book.shelf = shelf.
+      // instead of doing book.shelf = shelf.
       // Only setting the shelf of the book in state.booklist will cause a problem when
-      // setting the shelf to 'none' as this will not remove the books from state
+      // setting the shelf to 'none'. This will not remove the books from state
       // The API promise result is the source of thruth that should be used to update 
       // state.
-      
-      
+
       const bookList = this.state.bookList;
       let books = [];
       for(const newShelf in newBookList) {
