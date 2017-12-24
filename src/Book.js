@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import BookShelfChanger from './BookShelfChanger'
+import React, { Component } from 'react';
+import BookShelfChanger from './BookShelfChanger';
 import PropTypes from 'prop-types';
 
 class Book extends Component {
