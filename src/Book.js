@@ -34,6 +34,7 @@ class Book extends Component {
             <BookShelfChanger
               onChangeBookShelf={this.onBookShelfChanged.bind(this)}
               book={this.props.book}
+              currentShelf={this.props.currentShelf}
             />
           </div>
           <div className="book-title">{this.props.book.title}</div>
@@ -47,6 +48,7 @@ class Book extends Component {
 Book.propTypes = {
   onChangeBookShelf: PropTypes.func.isRequired,
   book: PropTypes.object.isRequired,
+  currentShelf: PropTypes.string.isRequired,
 }
 
 export default Book;

@@ -30,7 +30,7 @@ class ListBooks extends Component {
       return (
         <ol className="books-grid">
           {books.map((book) =>
-            <Book book={book} onChangeBookShelf={this.onBookShelfChanged.bind(this)} key={book.title}/>
+            <Book book={book} onChangeBookShelf={this.onBookShelfChanged.bind(this)} key={book.id} currentShelf={book.shelf}/>
           )}
         </ol>
       )

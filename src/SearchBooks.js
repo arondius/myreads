@@ -9,7 +9,6 @@ class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        bookList: this.props.bookList,
         query: '',
         results: []
     }
@@ -36,7 +35,21 @@ class Search extends Component {
       )
     }
     else if(this.state.results.length > 0) {
-      const books = this.state.results.map((book) => <Book key={book.id} book={book} onChangeBookShelf={this.onBookShelfChanged.bind(this)} />)
+      const books = this.state.results.map((book) => {
+        
+        // We check if the book that was returned from the search query matches 
+        // a book in the current bookList. If it's already in our bookShelf we 
+        // want to assign it's shelf to the book in the search results page.
+        const shelf = ( this.props.bookList.filter((b) => b.id === book.id)[0])  
+        ? this.props.bookList.filter((b) => b.id === book.id)[0].shelf : 'none';
+        
+        return (
+          <Book 
+            book={book} 
+            onChangeBookShelf={this.onBookShelfChanged.bind(this)} key={book.id} currentShelf={shelf}
+          />
+        )
+      })
       return (
       <ol className="books-grid">
         {books}
