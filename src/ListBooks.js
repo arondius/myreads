@@ -10,7 +10,6 @@ class ListBooks extends Component {
   }
 
   renderBookshelves() {
-    // console.log('ListBooks.js this.props in renderBookshelves ', this.props);
     if(this.props.bookShelves && this.props.bookShelves.length > 0) {
       return (
         this.props.bookShelves.map((bookShelf) => 

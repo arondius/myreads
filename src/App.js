@@ -23,7 +23,6 @@ class BooksApp extends React.Component {
   
   changeBookShelf = (bookToUpdate, shelf) => {
     BooksAPI.update(bookToUpdate, shelf).then((newBookList) => {
-      //console.log('App.js newBookList', newBookList);
 
       // So here we need to use the return value from the API result (newBookList), 
       // instead of using book.shelf = shelf.
@@ -39,7 +38,6 @@ class BooksApp extends React.Component {
         if(newBookList.hasOwnProperty(newShelf)) {
           newBookList[newShelf].map( (id, key) => {
              const book = ( bookList.filter((b) => b.id === id)[0] ) ? (bookList.filter((b) => b.id === id)[0]) : bookToUpdate;
-             //console.log('book ', book);
              book.shelf = newShelf;
             return books.push(book);
           })

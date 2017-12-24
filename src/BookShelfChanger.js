@@ -13,7 +13,6 @@ class BookShelfChanger extends Component {
   onBookShelfChanged(book, event) {
     const shelf = event.target.value;
     this.setState({shelfChangeValue: shelf});
-    //console.log('BookShelfChanger.js book', book);
     this.props.onChangeBookShelf(book, shelf);
   }
 
