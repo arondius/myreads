@@ -20,9 +20,9 @@ class Search extends Component {
   }
   
   updateQuery(query) {
-    this.setState({ query: query.trim() });
+    this.setState({ query: query });
     if(this.state.query.length > 1) {
-      search(this.state.query).then((results) => {
+      search(this.state.query.trim()).then((results) => {
         this.setState({results});
       }
     )}
