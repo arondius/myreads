@@ -11,7 +11,8 @@ class Search extends Component {
     super(props);
     this.state = {
         query: '',
-        results: []
+        results: [],
+        networkError: null
     }
   }
 
@@ -25,14 +26,21 @@ class Search extends Component {
     if(this.state.query.length > 1) {
       search(this.state.query.trim()).then((results) => {
         this.setState({results});
-      }
-    )}
+      })
+      .catch((e) => {
+        this.setState({'networkError': true})}
+      )
+    }
   }
   
   renderBooks() {
     if(this.state.results.error) {
       return (
         <p className="books-grid">No books with that title</p>
+      )
+    } else if (this.state.networkError) {
+      return (
+        <p className="books-grid">Could not connect to search engine. Is your internet connection working?</p>
       )
     }
     else if(this.state.results.length > 0) {
