@@ -7,7 +7,8 @@ import './App.css'
 
 class BooksApp extends React.Component {
   state = {
-    bookList: []
+    bookList: [],
+    APIError: null
   }
 
   componentDidMount() {
@@ -43,11 +44,15 @@ class BooksApp extends React.Component {
         }
       }
       this.setState({bookList: books});
-    });
+    }).catch((e) => this.setState({APIError: true}));
   }
 
   render() {
     const bookShelves = ["currentlyReading", "wantToRead", "read"];
+    if(this.state.APIError) {
+      return <p className="center"><span>Unfortunateley, we could not process your request due to a technical error. <br />
+      Please reload the page and accept our sincerest apologees.</span></p>
+    }
     return (
       <div className="app">
         <Route exact path="/" render={() => (

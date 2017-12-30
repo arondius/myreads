@@ -178,3 +178,19 @@ body, .app {
   text-align: center;
   font-size: 0.8em;
 }
+
+.center {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	justify-content: center;
+	width: 100vw;
+	height: 100vh;
+	align-items: center;
+	font-size: 32px;
+	color: #006400;
+}
+
+.center span {
+  max-width: 60vw;
+}
